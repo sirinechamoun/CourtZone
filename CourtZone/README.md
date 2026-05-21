@@ -1,17 +1,18 @@
 # CourtZone - ASP.NET Core MVC + SQLite
 
 CourtZone is a simple football and basketball court reservation website for a university ASP.NET project.
+Development branch used for UI improvements and project documentation...
 
 ## Features
 
 - View football and basketball courts
 - Add real stadium names and image URLs later
 - Reserve courts by date and time
-- Prevent double booking
+- Prevent double bookingg
 - Admin dashboard
 - Add/edit courts
 - Happy hour discounts for dead hours
-- Reservation approval/rejection
+- Reservation approval or rejection
 - SQLite database generated automatically
 
 ## Requirements
@@ -62,7 +63,7 @@ Then edit or add a court and put either:
 - an online image URL, or
 - a local image path like `/images/my-stadium.jpg`
 
-If using a local image, place it inside:
+If using a local image, place it pls inside:
 
 ```text
 wwwroot/images
