@@ -1,0 +1,15 @@
+.hero {
+    background: linear-gradient(135deg, #101820, #1d3557);
+    color: white;
+    border-radius: 24px;
+    padding: 48px;
+}
+.card-img-top {
+    height: 210px;
+    object-fit: cover;
+    background: #e9ecef;
+}
+.stat-card {
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}

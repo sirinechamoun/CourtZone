@@ -1,0 +1,25 @@
+<h1>Login</h1>
+
+<form method="post" class="col-md-5">
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <div class="mb-3">
+        <label>Username</label>
+        <input name="username" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <input name="password" type="password" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary">Login</button>
+</form>
+
+<hr />
+
+<p><strong>Admin:</strong> admin / admin123</p>
+<p><strong>User:</strong> user / user123</p>

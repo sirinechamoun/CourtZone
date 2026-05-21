@@ -1,0 +1,103 @@
+@model List<Court>
+
+<h1>Manage Courts</h1>
+
+<a class="btn btn-success mb-3" asp-action="AddCourt">
+    Add New Court
+</a>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Sport</th>
+            <th>Area</th>
+            <th>City</th>
+            <th>Distance</th>
+            <th>Price/Hour</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+
+            <td style="width:140px;">
+
+                @if (!string.IsNullOrEmpty(c.ImageUrl))
+                {
+                    <img src="@c.ImageUrl"
+                         style="width:120px;height:80px;object-fit:cover;border-radius:10px;" />
+                }
+                else
+                {
+                    <span>No Image</span>
+                }
+
+            </td>
+
+            <td>
+                <strong>@c.Name</strong>
+            </td>
+
+            <td>
+                @c.Sport
+            </td>
+
+            <td>
+                @c.Area
+            </td>
+
+            <td>
+                @c.City
+            </td>
+
+            <td>
+                @c.DistanceFromBeirutKm km
+            </td>
+
+            <td>
+                $@c.PricePerHour
+            </td>
+
+            <td>
+
+                @if (c.IsActive)
+                {
+                    <span class="badge bg-success">
+                        Active
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">
+                        Inactive
+                    </span>
+                }
+
+            </td>
+
+            <td>
+
+                <a class="btn btn-primary btn-sm"
+                   asp-action="EditCourt"
+                   asp-route-id="@c.Id">
+
+                    Edit
+
+                </a>
+
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>

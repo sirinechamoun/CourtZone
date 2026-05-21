@@ -1,0 +1,42 @@
+@model HappyHourDiscount
+
+<h1>Edit Happy Hour Discount</h1>
+
+<form method="post" class="col-md-7">
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="CourtId" class="form-label"></label>
+        <select asp-for="CourtId" asp-items="ViewBag.Courts" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DayOfWeek" class="form-label"></label>
+        <select asp-for="DayOfWeek" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTimeText" class="form-label"></label>
+        <input asp-for="StartTimeText" type="time" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EndTimeText" class="form-label"></label>
+        <input asp-for="EndTimeText" type="time" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DiscountPercentage" class="form-label"></label>
+        <input asp-for="DiscountPercentage" type="number" min="1" max="100" class="form-control" />
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Active</label>
+    </div>
+
+    <button class="btn btn-primary">Update Discount</button>
+    <a class="btn btn-secondary" asp-action="Discounts">Cancel</a>
+</form>

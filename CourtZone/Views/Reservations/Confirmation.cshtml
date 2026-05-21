@@ -1,0 +1,13 @@
+@model Reservation
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1>Reservation Submitted</h1>
+        <p>Your reservation is pending admin approval.</p>
+        <p><strong>Court:</strong> @Model.Court?.Name</p>
+        <p><strong>Time:</strong> @Model.StartTime for @Model.DurationHours hour(s)</p>
+        <p><strong>Original Price:</strong> $@Model.OriginalPrice</p>
+        <p><strong>Discount:</strong> $@Model.DiscountAmount</p>
+        <p><strong>Final Price:</strong> $@Model.FinalPrice</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+    </div>
+</div>

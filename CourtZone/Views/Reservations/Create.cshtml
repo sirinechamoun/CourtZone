@@ -1,0 +1,64 @@
+@model Reservation
+@{
+    Court court = ViewBag.Court;
+    HappyHourDiscount? bestDiscount = ViewBag.BestDiscount as HappyHourDiscount;
+}
+
+<h1>Reserve @court.Name</h1>
+
+@if (bestDiscount != null)
+{
+    <div class="alert alert-warning">
+        🔥 Save <strong>@bestDiscount.DiscountPercentage%</strong>
+        by reserving during happy hours:
+        <strong>@bestDiscount.TimeRangeText</strong>
+        on <strong>@bestDiscount.DayOfWeek</strong>.
+    </div>
+}
+
+<form asp-action="Create" method="post" class="col-md-7">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="CourtId" />
+
+    <div class="mb-3">
+        <label asp-for="CustomerName" class="form-label"></label>
+        <input asp-for="CustomerName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CustomerEmail" class="form-label"></label>
+        <input asp-for="CustomerEmail" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTime" class="form-label"></label>
+        <input asp-for="StartTime" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DurationHours" class="form-label">
+            Duration
+        </label>
+
+        <input asp-for="DurationHours"
+               type="number"
+               step="0.5"
+               min="0.5"
+               class="form-control"
+               placeholder="Example: 1.5 = 1 hour 30 minutes" />
+
+        <small class="text-muted">
+            Use decimals: 0.5 = 30 minutes, 1.5 = 1 hour 30 minutes, 2.5 = 2 hours 30 minutes.
+        </small>
+    </div>
+
+    <p>
+        Base price:
+        <strong>$@court.PricePerHour/hour</strong>
+    </p>
+
+    <button class="btn btn-success">
+        Submit Reservation
+    </button>
+</form>

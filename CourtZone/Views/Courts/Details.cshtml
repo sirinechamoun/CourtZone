@@ -1,0 +1,22 @@
+@model Court
+<h1>@Model.Name</h1>
+<div class="row">
+    <div class="col-md-6"><img class="img-fluid rounded" src="@(Model.ImageUrl ?? "/images/placeholder.jpg")" /></div>
+    <div class="col-md-6">
+        <p><strong>Sport:</strong> @Model.Sport</p>
+        <p><strong>Location:</strong> @Model.Location</p>
+        <p><strong>Price:</strong> $@Model.PricePerHour / hour</p>
+        <h4>Happy Hour Discounts</h4>
+        @if (Model.HappyHourDiscounts.Any())
+        {
+            <ul>
+            @foreach (var d in Model.HappyHourDiscounts.Where(x => x.IsActive))
+            {
+                <li>@d.DayOfWeek: @d.TimeRangeText, @d.DiscountPercentage% off</li>
+            }
+            </ul>
+        }
+        else { <p>No active discounts.</p> }
+        <a class="btn btn-primary" asp-controller="Reservations" asp-action="Create" asp-route-courtId="@Model.Id">Reserve this Court</a>
+    </div>
+</div>

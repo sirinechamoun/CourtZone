@@ -1,0 +1,34 @@
+@model List<Reservation>
+<h1>Admin Dashboard</h1>
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="card stat-card p-3"><h6>Total Reservations</h6><h3>@ViewBag.TotalReservations</h3></div></div>
+    <div class="col-md-3"><div class="card stat-card p-3"><h6>Pending</h6><h3>@ViewBag.PendingReservations</h3></div></div>
+    <div class="col-md-3"><div class="card stat-card p-3"><h6>Revenue</h6><h3>$@ViewBag.TotalRevenue</h3></div></div>
+    <div class="col-md-3"><div class="card stat-card p-3"><h6>Courts</h6><h3>@ViewBag.Courts</h3></div></div>
+</div>
+<div class="mb-3">
+    <a class="btn btn-primary" asp-action="Courts">Manage Courts</a>
+    <a class="btn btn-warning" asp-action="Discounts">Manage Happy Hours</a>
+</div>
+<table class="table table-striped">
+    <thead><tr><th>Court</th><th>Customer</th><th>Time</th><th>Price</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.Court?.Name</td>
+            <td>@r.CustomerName</td>
+            <td>@r.StartTime</td>
+            <td>$@r.FinalPrice</td>
+            <td>@r.Status</td>
+            <td>
+                @if (r.Status == ReservationStatus.Pending)
+                {
+                    <a class="btn btn-sm btn-success" asp-action="Approve" asp-route-id="@r.Id">Approve</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Reject" asp-route-id="@r.Id">Reject</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

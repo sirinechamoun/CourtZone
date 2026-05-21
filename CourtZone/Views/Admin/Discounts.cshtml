@@ -1,0 +1,81 @@
+@model List<HappyHourDiscount>
+
+<h1>Happy Hour Discounts</h1>
+
+<a class="btn btn-warning mb-3" asp-action="AddDiscount">
+    Add Discount
+</a>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Court</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Discount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach (var d in Model)
+    {
+        <tr>
+
+            <td>@d.Court?.Name</td>
+
+            <td>@d.DayOfWeek</td>
+
+            <td>@d.TimeRangeText</td>
+
+            <td>@d.DiscountPercentage%</td>
+
+            <td>
+                @if (d.IsActive)
+                {
+                    <span class="badge bg-success">
+                        Active
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">
+                        Inactive
+                    </span>
+                }
+            </td>
+
+            <td>
+
+                <a class="btn btn-sm btn-primary"
+                   asp-action="EditDiscount"
+                   asp-route-id="@d.Id">
+                    Edit
+                </a>
+
+                <form asp-action="DeleteDiscount"
+                      asp-route-id="@d.Id"
+                      method="post"
+                      style="display:inline;">
+
+                    <button type="submit"
+                            class="btn btn-sm btn-danger"
+                            onclick="return confirm('Delete this discount?')">
+
+                        Delete
+
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>

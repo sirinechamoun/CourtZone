@@ -1,0 +1,23 @@
+@model List<Court>
+<div class="hero mb-4">
+    <h1>Reserve Football & Basketball Courts</h1>
+    <p class="lead">Book courts easily and enjoy happy-hour discounts during dead hours.</p>
+    <a class="btn btn-warning btn-lg" asp-controller="Courts" asp-action="Index">Book Now</a>
+</div>
+<h2>Featured Courts</h2>
+<div class="row g-4">
+@foreach (var court in Model)
+{
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+            <img src="@(court.ImageUrl ?? "/images/placeholder.jpg")" class="card-img-top" alt="@court.Name" />
+            <div class="card-body">
+                <h5 class="card-title">@court.Name</h5>
+                <p>@court.Sport - @court.Location</p>
+                <p><strong>$@court.PricePerHour</strong> / hour</p>
+                <a class="btn btn-primary" asp-controller="Reservations" asp-action="Create" asp-route-courtId="@court.Id">Reserve</a>
+            </div>
+        </div>
+    </div>
+}
+</div>

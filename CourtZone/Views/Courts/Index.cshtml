@@ -1,0 +1,211 @@
+@model List<Court>
+
+<section class="mb-5">
+    <div class="p-5 rounded-4 text-white shadow-lg" style="background: linear-gradient(135deg, #111827, #1f2937);">
+        <span class="badge bg-warning text-dark mb-3">CourtZone Lebanon</span>
+
+        <h1 class="display-5 fw-bold">
+            Book Football & Basketball Courts in Lebanon
+        </h1>
+
+        <p class="lead">
+            Find courts around Beirut, Jdeideh, Jounieh, Batroun and more.
+        </p>
+
+        <a class="btn btn-warning btn-lg" href="#courts">
+            Browse Courts
+        </a>
+    </div>
+</section>
+
+<section id="courts">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Available Courts</h2>
+        <span class="text-muted">@Model.Count courts available</span>
+    </div>
+<div class="mb-4 position-relative">
+    <label class="form-label fw-bold">Search Court</label>
+    <input id="courtSearch"
+           type="text"
+           class="form-control form-control-lg"
+           placeholder="Search Rebound, Game House, Batroun..." />
+
+    <div id="suggestions"
+         class="list-group position-absolute w-100 shadow"
+         style="z-index: 1000; display:none;">
+    </div>
+</div>
+    <div class="row g-4">
+        @foreach (var court in Model)
+        {
+            var bestDiscount = court.HappyHourDiscounts?
+                .Where(h => h.IsActive)
+                .OrderByDescending(h => h.DiscountPercentage)
+                .FirstOrDefault();
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden @(bestDiscount != null ? "border border-warning border-3" : "")">
+
+                    @if (!string.IsNullOrEmpty(court.ImageUrl))
+                    {
+                        <img src="@court.ImageUrl"
+                             class="card-img-top"
+                             style="height:220px; object-fit:cover;"
+                             alt="@court.Name" />
+                    }
+                    else
+                    {
+                        <div class="bg-light d-flex align-items-center justify-content-center"
+                             style="height:220px;">
+                            <span class="text-muted">No image available</span>
+                        </div>
+                    }
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-dark">@court.Sport</span>
+                            <span class="badge bg-warning text-dark">@court.Area</span>
+                        </div>
+
+                        @if (bestDiscount != null)
+                        {
+                            <div class="alert alert-warning py-2 mb-3">
+                                🔥 Happy Hour Available:
+                                Save up to <strong>@bestDiscount.DiscountPercentage%</strong>
+                                during off-peak hours.
+                            </div>
+                        }
+
+                        <h5 class="card-title fw-bold">@court.Name</h5>
+
+                        <p class="card-text text-muted mb-1">
+                            📍 @court.Location
+                        </p>
+
+                        <p class="card-text text-muted mb-1">
+                            🚗 @court.DistanceFromBeirutKm km from Beirut
+                        </p>
+
+                        <p class="fs-5 fw-bold mt-3">
+                            $@court.PricePerHour / hour
+                        </p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0">
+                        <a class="btn btn-success w-100"
+                           asp-controller="Reservations"
+                           asp-action="Create"
+                           asp-route-courtId="@court.Id">
+                            Reserve Now
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="p-5 rounded-4 bg-dark text-white text-center shadow-lg">
+
+        <span class="badge bg-warning text-dark mb-3 fs-6">
+            COMING SOON
+        </span>
+
+        <h2 class="fw-bold display-6">
+            Padel Courts Are Coming to CourtZone 🎾
+        </h2>
+
+        <p class="lead mt-3">
+            We are expanding across Lebanon with premium indoor and outdoor padel courts.
+        </p>
+
+        <div class="row mt-5 g-4">
+
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white border-0 shadow-sm h-100 rounded-4">
+                    <div class="card-body">
+                        <h4>Beirut Padel Hub</h4>
+                        <p>
+                            Indoor premium padel experience coming soon to Beirut.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white border-0 shadow-sm h-100 rounded-4">
+                    <div class="card-body">
+                        <h4>Batroun Beach Padel</h4>
+                        <p>
+                            Outdoor padel courts near the Batroun coast.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white border-0 shadow-sm h-100 rounded-4">
+                    <div class="card-body">
+                        <h4>Jounieh Padel Arena</h4>
+                        <p>
+                            Future tournament-ready padel courts in Jounieh.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+    const courts = [
+        @foreach (var court in Model)
+        {
+            <text>
+            {
+                id: @court.Id,
+                name: "@court.Name",
+                area: "@court.Area",
+                sport: "@court.Sport"
+            },
+            </text>
+        }
+    ];
+
+    const searchInput = document.getElementById("courtSearch");
+    const suggestions = document.getElementById("suggestions");
+
+    searchInput.addEventListener("input", function () {
+        const value = this.value.toLowerCase().trim();
+        suggestions.innerHTML = "";
+
+        if (value.length === 0) {
+            suggestions.style.display = "none";
+            return;
+        }
+
+        const matches = courts.filter(c =>
+            c.name.toLowerCase().includes(value) ||
+            c.area.toLowerCase().includes(value) ||
+            c.sport.toLowerCase().includes(value)
+        );
+
+        if (matches.length === 0) {
+            suggestions.style.display = "none";
+            return;
+        }
+
+        matches.forEach(court => {
+            const item = document.createElement("a");
+            item.className = "list-group-item list-group-item-action";
+            item.href = `/Reservations/Create?courtId=${court.id}`;
+            item.innerHTML = `<strong>${court.name}</strong><br>
+                              <small>${court.sport} • ${court.area}</small>`;
+            suggestions.appendChild(item);
+        });
+
+        suggestions.style.display = "block";
+    });
+</script>
