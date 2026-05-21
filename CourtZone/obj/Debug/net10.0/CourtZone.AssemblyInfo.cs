@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CourtZone")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a5ecf3eaf1a91768050fbbc0961f582897f358a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CourtZone")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CourtZone")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
