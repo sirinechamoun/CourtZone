@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourtZone.Models;
-
+// for discounts
 public class HappyHourDiscount
 {
     public int Id { get; set; }
