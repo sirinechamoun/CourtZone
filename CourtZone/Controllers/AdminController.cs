@@ -9,7 +9,7 @@ namespace CourtZone.Controllers;
 public class AdminController : Controller
 {
     private readonly AppDbContext _db;
-    public AdminController(AppDbContext db) => _db = db;
+    public AdminController(AppDbContext db) => _db = db; // private 
 
     public async Task<IActionResult> Dashboard()
     {

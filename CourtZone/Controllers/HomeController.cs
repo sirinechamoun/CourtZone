@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace CourtZone.Controllers;
 [Authorize]
 public class HomeController : Controller
+// system architecure
 {
     private readonly AppDbContext _db;
     public HomeController(AppDbContext db) => _db = db;
