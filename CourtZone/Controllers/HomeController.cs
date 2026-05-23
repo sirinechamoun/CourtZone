@@ -11,6 +11,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+    //implement advannce
         var courts = await _db.Courts.Where(c => c.IsActive).ToListAsync();
         return View(courts);
     }
