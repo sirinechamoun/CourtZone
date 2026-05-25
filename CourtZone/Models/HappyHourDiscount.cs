@@ -10,7 +10,7 @@ public class HappyHourDiscount
     [Required]
     public int CourtId { get; set; }//view models
     public Court? Court { get; set; }//akka
-
+//ewasy
     [Required]
     public DayOfWeek DayOfWeek { get; set; }
 
