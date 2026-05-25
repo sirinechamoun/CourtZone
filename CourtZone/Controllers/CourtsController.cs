@@ -17,7 +17,7 @@ public class CourtsController : Controller
         .Include(c => c.HappyHourDiscounts)
         .ToListAsync(); //ujguh
 
-    return View(courts);
+    return View(courts);//hhhi
 }
     
 
