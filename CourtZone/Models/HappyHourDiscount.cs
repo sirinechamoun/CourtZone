@@ -8,7 +8,7 @@ public class HappyHourDiscount
     public int Id { get; set; }
 
     [Required]
-    public int CourtId { get; set; }
+    public int CourtId { get; set; }//view models
     public Court? Court { get; set; }
 
     [Required]
