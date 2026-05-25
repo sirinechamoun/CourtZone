@@ -15,7 +15,7 @@ public class CourtsController : Controller
     var courts = await _db.Courts
         .Where(c => c.IsActive)
         .Include(c => c.HappyHourDiscounts)
-        .ToListAsync();
+        .ToListAsync(); //ujguh
 
     return View(courts);
 }
